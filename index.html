@@ -107,6 +107,10 @@
   // Function to delete 
   function pressDelete() {
     currentNumber = currentNumber.slice(0, -1);
+    // if the current number becomes empty, set it to "0"
+    if (currentNumber === "") {
+      currentNumber = "0";
+    }
     updateScreen();
   }
 
