@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <link href="calculator.css" rel="stylesheet">
+    <script src="calculator.js" defer></script>
+
+</head>
+<body>
+    <div class="calculator-grid">
+        <div class="output">
+            <div id="previousOperand" class="previous-operand"></div>
+            <div id="currentOperand" class="current-operand">0</div>
+        </div>
+        <button id="clear" class="span-two">AC</button>
+        <button id="delete">DEL</button>
+        <button id="divide">/</button>
+        <button id="n1">1</button>
+        <button id="n2">2</button>
+        <button id="n3">3</button>
+        <button id="multiply">*</button>
+        <button id="n4">4</button>
+        <button id="n5">5</button>
+        <button id="n6">6</button>
+        <button id="subtract">-</button>
+        <button id="n7">7</button>
+        <button id="n8">8</button>
+        <button id="n9">9</button>
+        <button id="add">+</button>
+        <button id="dot">.</button>
+        <button id="n0">0</button>
+        <button id="equals" class="span-two">=</button>
+        
+    </div>
+    
+
+    <script>
+  // Display elements
+  var currentDisplay = document.getElementById("currentOperand");
+  var previousDisplay = document.getElementById("previousOperand");
+
+  // Store values
+  var currentNumber = "";
+  var previousNumber = "";
+  var operator = "";
+
+  // Update screen
+  function updateScreen() {
+    currentDisplay.innerText = currentNumber;
+    previousDisplay.innerText = previousNumber + " " + operator;
+  }
+
+  // Function to input number
+  function pressNumber(num) {
+    currentNumber = currentNumber + num;
+    updateScreen();
+  }
+
+  // Function to add operator
+  function pressOperator(op) { 
+    // currentNumber = "";
+    if (currentNumber === "") {
+      return; 
+    }
+
+    previousNumber = currentNumber;
+    operator = op;
+    currentNumber = "";
+    updateScreen();
+  }
+
+  // Function to calculate 
+  function pressEquals() {
+    var num1 = Number(previousNumber);
+    var num2 = Number(currentNumber);
+    var result = num1 + num2;
+
+    if (operator === "+") {
+      result = num1 + num2;
+    } 
+    else if (operator === "-") {
+      result = num1 - num2;
+    } 
+    else if (operator === "*") {
+      result = num1 * num2;
+    } 
+    else if (operator === "/") {
+      result = num1 / num2;
+    }
+
+    currentNumber = result.toString();
+    previousNumber = "";
+    operator = "";
+    updateScreen();
+  }
+
+  // Function to clear all
+  function pressClear() {
+    currentNumber = "";
+    previousNumber = "";
+    operator = "";
+    updateScreen();
+  }
+
+  // Function to delete 
+  function pressDelete() {
+    currentNumber = currentNumber.slice(0, -1);
+    updateScreen();
+  }
+
+  // Buttons linking
+
+  document.getElementById("n0").onclick = function() { pressNumber("0"); };
+  document.getElementById("n1").onclick = function() { pressNumber("1"); };
+  document.getElementById("n2").onclick = function() { pressNumber("2"); };
+  document.getElementById("n3").onclick = function() { pressNumber("3"); };
+  document.getElementById("n4").onclick = function() { pressNumber("4"); };
+  document.getElementById("n5").onclick = function() { pressNumber("5"); };
+  document.getElementById("n6").onclick = function() { pressNumber("6"); };
+  document.getElementById("n7").onclick = function() { pressNumber("7"); };
+  document.getElementById("n8").onclick = function() { pressNumber("8"); };
+  document.getElementById("n9").onclick = function() { pressNumber("9"); };
+
+  // Dot
+  document.getElementById("dot").onclick = function() {
+    if (!currentNumber.includes(".")) {
+      pressNumber(".");
+    }
+  };
+
+  // Operators
+  document.getElementById("add").onclick = function() { pressOperator("+"); };
+  document.getElementById("subtract").onclick = function() { pressOperator("-"); };
+  document.getElementById("multiply").onclick = function() { pressOperator("*"); };
+  document.getElementById("divide").onclick = function() { pressOperator("/"); };
+
+  // Equals
+  document.getElementById("equals").onclick = function() {
+    pressEquals();
+  };
+
+  // Clear
+  document.getElementById("clear").onclick = function() {
+    pressClear();
+  };
+
+  // Delete
+  document.getElementById("delete").onclick = function() {
+    pressDelete();
+  };
+
+</script>
+    
+</body>
+</html>
