@@ -77,14 +77,18 @@
     var num2 = Number(currentNumber);
     var result = num1 + num2;
 
-    switch(){
-  case a = "+" break;
-
-  case b = "-" break;
-
-  case c = "*" break;
-
-  case d = "/" break;
+    switch (operand) {
+  case "+":
+    result = num1 + num2 ;
+    break;
+  case "-":
+    result = num1 - num2;
+    break;
+  case "*":
+    result = num1 * num2;
+    break;
+  case "/":
+    result = num1 / num2;
 }
 
     currentNumber = result.toString();
